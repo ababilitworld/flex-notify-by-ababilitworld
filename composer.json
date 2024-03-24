@@ -1,0 +1,51 @@
+{
+    "name": "ababilitworld/flex-notify-by-ababilitworld",
+    "description": "The Flexible Way of Sending Notifications from WordPress, Exclusively by Ababil IT World.",
+    "type": "wordpress-plugin",
+    "keywords": ["wordpress", "plugin", "notification"],
+    "homepage": "https://ababilitworld.com/wp-plugin/flex-notify-by-ababilitworld",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Ababil IT World",
+            "email": "ababilitworld@gmail.com",
+            "homepage": "https://ababilitworld.com/"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "firebase/php-jwt": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ababilitworld\\FlexNotifyByAbabilitworld\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ababilitworld\\FlexNotifyByAbabilitworld\\Tests\\": "tests/"
+        }
+    },
+    "extra": { 
+        "wordpress-plugin": {
+            "name": "FlexNotify By Ababil IT World",
+            "uri": "https://ababilitworld.com/wp-plugin/flex-notify-by-ababilitworld",
+            "description": "The Flexible Way of Sending Notifications from WordPress, Exclusively by Ababil IT World.",
+            "version": "1.0.0",
+            "requires": {
+                "php": ">=7.4",
+                "wordpress": ">=5.2",
+                "woocommerce": ">=3.0.9"
+            },
+            "tested": "6.4",
+            "author": "Ababil IT World",
+            "author_uri": "https://ababilitworld.com/",
+            "author_email": "ababilitworld@gmail.com",
+            "license": "GPL-3.0-or-later",
+            "text_domain": "flex-notify-by-ababilitworld",
+            "domain_path": "/language",
+            "namespace": "FlexNotifyByAbabilitworld",
+            "prefix": "PLUGIN_DIR"
+        }
+    }
+}
