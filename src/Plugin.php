@@ -1,26 +1,30 @@
 <?php
-    namespace Ababilitworld\FlexNotifyByAbabilitworld\Core;
+    namespace Ababilitworld\FlexNotifyByAbabilitworld;
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || die();
 
-    use Ababilitworld\FlexNotifyByAbabilitworld\{
-        Core\Library\Function\CoreFunction
-    };
-
-    use function AbabilItWorld\FlexNotifyByAbabilitworld\{
-		Core\Library\Function\core_function
+    use function AbabilItWorld\FlexCoreByAbabilitworld\{
+		Core\Library\Function\wp_error_handler,
+		Core\Library\Function\wp_function
 	};
-	
-	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Core\Plugin' ) ) 
+
+	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Plugin' ) ) 
 	{
 		class Plugin 
 		{
 			/**
-			 * Class error
+			 * Objcet wp_error
 			 *
 			 * @var object
 			 */
-			private $error;
+			private $wp_error;
+
+			/**
+			 * Objcet wp_function
+			 *
+			 * @var object
+			 */
+			private $wp_function;
 	
 			/**
 			 * Plugin version
@@ -34,9 +38,8 @@
 			 */
 			public function __construct() 
 			{
-				$this->error = new \WP_Error();
-                new CoreFunction();
-				add_action('admin_notices', array($this, 'admin_notice' ) );
+				$this->wp_error = wp_error_handler();
+                $this->wp_function = wp_function();
 				register_deactivation_hook(PLUGIN_FILE, array($this, 'deactivate'));
 				register_uninstall_hook(PLUGIN_FILE, array('self', 'uninstall'));
                 
@@ -107,17 +110,6 @@
 				flush_rewrite_rules();
 			}
 	
-			/**
-			 * Show admin panel error if any
-			 *
-			 * @return void
-			 */
-			public function admin_notice()
-			{
-				$core_function = core_function();	
-				$core_function::error_notice($this->error);
-			}
-	
 		}
 
         //new Plugin();
@@ -125,17 +117,15 @@
 		/**
 		 * Return the instance
 		 *
-		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Core\Plugin
+		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Plugin
 		 */
-		function flex_notify() 
+		function plugin() 
 		{
 			return Plugin::instance();
 		}
 	
 		// take off
-		//flex_notify();
-
-		
+		//plugin();
 	}
 	
 ?>

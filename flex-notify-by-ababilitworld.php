@@ -39,12 +39,20 @@
 	defined( 'PLUGIN_DIR' ) || define( 'PLUGIN_DIR', dirname( __FILE__ ) );
 	defined( 'PLUGIN_FILE' ) || define( 'PLUGIN_FILE', __FILE__ );
 	defined( 'PLUGIN_URL' ) || define( 'PLUGIN_URL', plugins_url() . '/' . plugin_basename( dirname( __FILE__ ) ) );
+	defined( 'PLUGIN_PRE_UNDS' ) || define( 'PLUGIN_PRE_UNDS', 'flex_notify_by_ababilitworld' );
+	defined( 'PLUGIN_PRE_HYPH' ) || define( 'PLUGIN_PRE_HYPH', 'flex-notify-by-ababilitworld' );
 
-	use Ababilitworld\FlexNotifyByAbabilitworld\Core\Plugin;
-	use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Main;
+	use Ababilitworld\FlexCoreByAbabilitworld\Core\Library\Function\WpErrorHandler;
+	use Ababilitworld\FlexCoreByAbabilitworld\Core\Library\Function\WpFunction;
+	use Ababilitworld\FlexNotifyByAbabilitworld\Plugin;
+	use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Notify;
+	use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Email\WpMail\WpMail;
 	
-	new Plugin();
-	new Main();
+	new WpErrorHandler();
+	new WpFunction();
+	new Plugin();	
+	new Notify();
+	new WpMail();
 	
 	register_activation_hook(__FILE__, [Plugin::class, 'activate']);
 	register_deactivation_hook(__FILE__, [Plugin::class, 'deactivate']);
