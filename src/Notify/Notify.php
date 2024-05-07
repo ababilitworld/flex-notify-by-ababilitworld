@@ -1,39 +1,30 @@
 <?php
     namespace Ababilitworld\FlexNotifyByAbabilitworld\Notify;
 
-use Exception;
-
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || die();
 
-    use function AbabilItWorld\FlexNotifyByAbabilitworld\{
-		Core\Library\Function\core_function
+    use function AbabilItWorld\FlexCoreByAbabilitworld\{
+		Core\Library\Function\wp_error_handler,
+		Core\Library\Function\wp_function
 	};
-	
-	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Notify\Main' ) ) 
+
+	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Notify\Notify' ) ) 
 	{
-		class Main 
+		class Notify 
 		{
 			/**
-			 * Class error
+			 * Object wp_error
 			 *
 			 * @var object
 			 */
-			private $error;
-	
-			/**
-			 * Plugin version
-			 *
-			 * @var string
-			 */
-			public $version = '1.0.0';
+			private $wp_error;
 	
 			/**
 			 * Constructor
 			 */
 			public function __construct() 
 			{
-				$this->error = new \WP_Error();
-				add_action('admin_notices', array($this, 'admin_notice' ) );
+				$this->wp_error = wp_error_handler();
 				add_action('plugins_loaded',array($this, 'plugins_loaded'));				
 				add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts' ) );
 				add_action('admin_menu', array($this, 'admin_menu' ) );				
@@ -112,29 +103,18 @@ use Exception;
 				return $instance;
 			}
 	
-			/**
-			 * Show admin panel error if any
-			 *
-			 * @return void
-			 */
-			public function admin_notice()
-			{
-				$core_function = core_function();	
-				$core_function::error_notice($this->error);
-			}
-	
 		}
 
-        //new Main();
+        //new Notify();
 	
 		/**
 		 * Return the instance
 		 *
-		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Core\Main
+		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Notify\Notify
 		 */
 		function notify() 
 		{
-			return Main::instance();
+			return Notify::instance();
 		}
 	
 		// take off
