@@ -38,8 +38,8 @@
 			 */
 			public function __construct() 
 			{
-				$this->wp_error = wp_error_handler();
-                $this->wp_function = wp_function();
+				//$this->wp_error = wp_error_handler();
+                //$this->wp_function = wp_function();
 				register_deactivation_hook(PLUGIN_FILE, array($this, 'deactivate'));
 				register_uninstall_hook(PLUGIN_FILE, array('self', 'uninstall'));
                 

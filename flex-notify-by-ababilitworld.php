@@ -46,13 +46,13 @@
 	use Ababilitworld\FlexCoreByAbabilitworld\Core\Library\Function\WpFunction;
 	use Ababilitworld\FlexNotifyByAbabilitworld\Plugin;
 	use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Notify;
-	use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Email\WpMail\WpMail;
+	//use Ababilitworld\FlexNotifyByAbabilitworld\Notify\Email\WpMail\WpMail;
 	
-	new WpErrorHandler();
-	new WpFunction();
+	//new WpErrorHandler();
+	//new WpFunction();
 	new Plugin();	
 	new Notify();
-	new WpMail();
+	//new WpMail();
 	
 	register_activation_hook(__FILE__, [Plugin::class, 'activate']);
 	register_deactivation_hook(__FILE__, [Plugin::class, 'deactivate']);

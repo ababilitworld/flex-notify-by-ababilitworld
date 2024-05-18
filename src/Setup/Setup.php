@@ -1,5 +1,5 @@
 <?php
-    namespace Ababilitworld\FlexNotifyByAbabilitworld\Notify;
+    namespace Ababilitworld\FlexNotifyByAbabilitworld\Setup;
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || die();
 
@@ -8,9 +8,9 @@
 		Core\Library\Function\wp_function
 	};
 
-	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Notify\Notify' ) ) 
+	if ( ! class_exists( '\AbabilItWorld\FlexNotifyByAbabilitworld\Setup\Setup' ) ) 
 	{
-		class Notify 
+		class Setup 
 		{
 			/**
 			 * Object wp_error
@@ -48,8 +48,8 @@
             public function enqueue_scripts()
             {
 				wp_enqueue_script( 'flex-notify-by-ababilitworld', PLUGIN_URL . '/dist/bundle.js', [ 'jquery', 'wp-element' ], wp_rand(), true );
-				wp_localize_script( 'flex-notify-by-ababilitworld', 'flexNotifyByAbabilItWorld', [
-					'apiUrl' => home_url( '/wp-json/flex-notify-by-ababilitworld' ),
+				wp_localize_script( 'flex-notify-by-ababilitworld', 'appLocalizer', [
+					'apiUrl' => home_url( '/wp-json' ),
 					'nonce' => wp_create_nonce( 'wp_rest' ),
 				] );											
 			}
@@ -62,10 +62,10 @@
             public function admin_menu()
             {
 				add_menu_page(
-					__('Flex Notify', 'flex-notify-by-ababilitworld'),
-					__('Flex Notify', 'flex-notify-by-ababilitworld'),
+					__('Flex Notify Setup', 'flex-notify-by-ababilitworld'),
+					__('Flex Notify Setup', 'flex-notify-by-ababilitworld'),
 					'manage_options',
-					'flex-notify-by-ababilitworld',
+					'flex-notify-setup-by-ababilitworld',
 					array($this, 'render_page'),
 					'dashicons-admin-post',
 					9
@@ -78,8 +78,8 @@
 			public function render_page() 
 			{
 				?>
-					<div id="flex-notify-by-ababilitworld-wrap">
-						<div id="flex-notify-by-ababilitworld">
+					<div id="flex-notify-setup-by-ababilitworld-wrap">
+						<div id="flex-notify-setup-by-ababilitworld">
 
 						</div>
 					</div>
@@ -105,20 +105,20 @@
 	
 		}
 
-        //new Notify();
+        //new Setup();
 	
 		/**
 		 * Return the instance
 		 *
-		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Notify\Notify
+		 * @return \AbabilItWorld\FlexNotifyByAbabilitworld\Setup\Setup
 		 */
-		function notify() 
+		function setup() 
 		{
-			return Notify::instance();
+			return Setup::instance();
 		}
 	
 		// take off
-		//notify();
+		//setup();
 
 		
 	}

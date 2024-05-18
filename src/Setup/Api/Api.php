@@ -1,6 +1,6 @@
 <?php
 
-namespace Ababilitworld\FlexNotifyByAbabilitworld\Notify\Api;
+namespace Ababilitworld\FlexNotifyByAbabilitworld\Setup\Api;
 
 (defined( 'ABSPATH' ) && defined( 'WPINC' )) || die();
 
@@ -9,7 +9,7 @@ defined( 'API_BASE_URL' ) || define('API_BASE_URL','flex-notify-by-ababilitworld
 use Ababilitworld\FlexCoreByAbabilitworld\Core\Library\Util\Api\Firebase\PhpJwtHelper;
 use Ababilitworld\FlexNotifyByAbabilitworld\PluginFunction\PluginFunction;
 
-if (!class_exists('Ababilitworld\FlexNotifyByAbabilitworld\Notify\Api\Api')) 
+if (!class_exists('Ababilitworld\FlexNotifyByAbabilitworld\Setup\Api\Api')) 
 {
     class Api
     {
@@ -24,7 +24,7 @@ if (!class_exists('Ababilitworld\FlexNotifyByAbabilitworld\Notify\Api\Api'))
                 'methods' => 'POST',
                 'callback'            => array($this, 'get_plugin_status'),
                 'permission_callback' => function($request){
-                    return true;
+                    return true || $this->check_permission($request);
                 },
             ));
 
@@ -32,7 +32,7 @@ if (!class_exists('Ababilitworld\FlexNotifyByAbabilitworld\Notify\Api\Api'))
                 'methods' => 'POST',
                 'callback'            => array($this, 'install_plugin'),
                 'permission_callback' => function($request){
-                    return true;
+                    return true || $this->check_permission($request);
                 },
             ));
 
@@ -104,16 +104,24 @@ if (!class_exists('Ababilitworld\FlexNotifyByAbabilitworld\Notify\Api\Api'))
 
         public function check_permission($request)
         {
-            $data = PhpJwtHelper::verify_request_token($request);
-            if($data && !is_string($data)) 
-            {
-                //now apply authorization logic here
-                return true;
+            if(class_exists(PhpJwtHelper::class))
+            {   
+                $data = PhpJwtHelper::verify_request_token($request);
+                if($data && !is_string($data)) 
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             else
             {
                 return false;
             }
+            
         }
 
         /**
